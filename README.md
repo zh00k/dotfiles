@@ -7,4 +7,7 @@ My personal dotfiles.
 - files in the repo root -> `$HOME`
 - `.config/` -> `$HOME/.config/`
 - `.local/bin/` -> `$HOME/.local/bin/`
-- `.local/share/` -> `$HOME/.local/share/`
+
+## Desktop Wallpapers
+Usually I use Waneella artworks (https://waneella.com/) 
+

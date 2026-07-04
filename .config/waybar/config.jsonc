@@ -1,0 +1,53 @@
+{
+    //
+    // Basic Settings
+    //
+
+    "layer": "top",
+    "position": "top",
+    "height": 36,
+    "spacing": 18,
+
+    "modules-left": [
+        "niri/workspaces"
+    ],
+
+    "modules-center": [
+    ],
+
+    "modules-right": [
+        "tray",
+        "bluetooth",
+        "clock"
+    ],
+
+    // -----
+    // Modules Configuration
+    // -----
+
+    "tray": {
+        "show-passive-items": true,
+        "icon-size": 15,
+        "spacing": 10
+    },
+
+    "clock": {
+        "interval": 60,
+        "format": "{:%a,%e %B  %R}",
+        "tooltip": false,
+        "on-click": "~/.local/bin/eww-calendar-toggle.sh"
+    },
+
+    // Thanks to: https://github.com/cephi-sui/dotfiles/blob/eea29a853cd272594785487add91fe5cee8f9d15/.config/waybar/config
+    "bluetooth": {
+        "format-on": "󰂯",
+        "format-off": "󰂲",
+        "format-disabled": "󰂲",
+        "format-connected": "󰂱",
+
+        "tooltip-format-connected": "{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+
+        "on-click": "blueman-manager"
+    }
+}
