@@ -1,0 +1,23 @@
+(defwindow calendar_popup
+  :monitor 0
+  :geometry (geometry
+    :x "16px"
+    :y "16px"
+    :width "280px"
+    :height "230px"
+    :anchor "top right")
+  :stacking "overlay"
+  :focusable "ondemand"
+  :namespace "calendar-popup"
+  (calendar-widget))
+
+(defwidget calendar-widget []
+  (box :class "calendar-root"
+    :orientation "vertical"
+    :space-evenly false
+    (calendar
+      :class "calendar-body"
+      :show-details false
+      :show-heading true
+      :show-day-names true
+      :show-week-numbers false)))

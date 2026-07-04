@@ -1,0 +1,103 @@
+/* ========================================
+   Typography
+   ======================================== */
+$font-family: "Geist";
+$font-size: 16px;
+
+/* ========================================
+   Color palette
+   ======================================== */
+$color-fg: #eeeeee;
+$color-fg-dim: #6f6f6f;
+$color-accent: #8aac8b;
+
+$color-bg: rgba(15, 15, 15, 0.96);
+$color-border: #3a3a3a;
+
+/* ========================================
+   Geometry
+   ======================================== */
+$radius-window: 6px;
+$radius-cell: 3px;
+
+$padding-window-y: 26px;
+$padding-window-x: 26px;
+$padding-calendar: 4px;
+
+/* ========================================
+   Base reset
+   Resets default GTK styling and applies
+   the global font and foreground color.
+   ======================================== */
+* {
+  all: unset;
+  font-family: $font-family;
+  font-size: $font-size;
+  color: $color-fg;
+}
+
+/* ========================================
+   Popup container
+   Outer calendar popup surface rendered by eww.
+   ======================================== */
+.calendar-root {
+  background: $color-bg;
+  border: 1px solid $color-border;
+  border-radius: $radius-window;
+  padding: $padding-window-y $padding-window-x;
+}
+
+/* ========================================
+   GTK calendar widget
+   Base styling for the built-in calendar widget.
+   ======================================== */
+calendar {
+  background: transparent;
+  color: $color-fg;
+  border-radius: $radius-window;
+  padding: $padding-calendar;
+}
+
+/* ========================================
+   Calendar header
+   Styles the month and year row.
+   ======================================== */
+calendar.header {
+  color: $color-fg;
+  font-weight: 700;
+  background: transparent;
+}
+
+/* ========================================
+   Navigation buttons
+   Styles the month/year navigation arrows.
+   ======================================== */
+calendar.button {
+  color: $color-fg;
+  font-weight: 700;
+  background: transparent;
+}
+
+/* ========================================
+   Selected / current day
+   Applies accent color and rounding to the
+   selected or currently focused day cell.
+   ======================================== */
+calendar:selected {
+  color: $color-accent;
+  border-radius: $radius-cell;
+}
+
+/* ========================================
+   Adjacent month days
+   Dims days that belong to the previous or
+   next month. Multiple selectors are used
+   because GTK can expose them differently.
+   ======================================== */
+calendar:indeterminate,
+calendar.view grid label:disabled,
+calendar.view grid label.inactive {
+  color: $color-fg-dim;
+  background: transparent;
+}
+
