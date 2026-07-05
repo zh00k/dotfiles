@@ -8,6 +8,7 @@ My personal dotfiles.
 - `.config/` -> `$HOME/.config/`
 - `.local/bin/` -> `$HOME/.local/bin/`
 
-## Desktop Wallpapers
+## Desktop Wallpaper
+"On The Hill" by Waneella
 Usually I use Waneella artworks (https://waneella.com/) 
 
