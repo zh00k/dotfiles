@@ -1,6 +1,6 @@
 # dotfiles
 
-My personal dotfiles.
+![](https://imgur.com/RYmyc9N)
 
 ## Structure
 
