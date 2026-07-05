@@ -1,6 +1,6 @@
 # dotfiles
 
-[Welcome to the rice fields, motherfucker!](https://i.imgur.com/RYmyc9N.gif)
+![Welcome to the rice fields, motherfucker!](https://i.imgur.com/RYmyc9N.gif)
 
 ## Structure
 
