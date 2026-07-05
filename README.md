@@ -9,6 +9,6 @@
 - `.local/bin/` -> `$HOME/.local/bin/`
 
 ## Desktop Wallpaper
-"On The Hill" by Waneella
-Usually I use Waneella artworks (https://waneella.com/) 
+**«On The Hill»** by [Waneella](https://waneella.com/)
+
 
