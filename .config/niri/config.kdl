@@ -1,4 +1,16 @@
-// 
+//                                       
+//                ▄▄▄     ▄▄▄            
+//         █▄   ▄██▀▀▀  ▄██▀▀▀           
+//         ██   ██ ▄▀█▄ ██ ▄▀█▄ ▄▄      
+//   ▀▀▀██ ████▄██   ██ ██   ██ ██ ▄█▀  
+//     ▄█▀ ██ ████  ▄██ ██  ▄██ ████    
+//  ▄▄██▄▄ █  ██ ▀███▀   ▀███▀ ▄██ ▀█▄  
+//                                      
+//  ==================================
+//  zh00k config: https://github.com/zh00k/dotfiles                                   
+//  ==================================
+//
+
 
 prefer-no-csd
 
@@ -17,45 +29,38 @@ input {
         drag-lock
         natural-scroll
         click-method "clickfinger"
-        accel-speed 0.5
+        accel-speed 0.8
         scroll-factor 0.7
         scroll-method "two-finger"
+        middle-emulation
     }
 
     mouse { }
 
-    warp-mouse-to-focus
-
     focus-follows-mouse max-scroll-amount="0%"
-}
-
-gestures {
-    hot-corners {
-        off
-    }
 }
 
 layout {
     gaps 16
-
     center-focused-column "never"
+    background-color "transparent"
+
+    border { off; }
+
+    struts {  }
+
+    default-column-width { proportion 0.5; }
 
     preset-column-widths {
         proportion 0.33333
         proportion 0.5
         proportion 0.66667
-    }
- 
-    default-column-width { proportion 0.5; }
+    } 
 
     focus-ring {
         width 2
-        active-color "#d4d4d4"
+        active-color "#707070"
         inactive-color "#505050"
-    }
-
-    border { 
-        off
     }
 
     shadow { 
@@ -66,97 +71,105 @@ layout {
         draw-behind-window true
         color "#00000090"
     }
-
-    background-color "transparent"
-
-    struts { }
-
 }
 
-// This line starts waybar, a commonly used bar for Wayland compositors.
+// Autostart
 spawn-at-startup "waybar"
-spawn-at-startup "swaybg" "-i" "/home/zh00k/Pictures/Wallpapers/wallpaper.jpg" "-m" "fill"
-spawn-at-startup "throne"
+spawn-at-startup "swaybg" "-i" "/home/zh00k/Pictures/Wallpapers/wallpaper.png" "-m" "fill"
+spawn-at-startup "sh" "-c" "sleep 2 && /usr/local/bin/amnezia-launcher"
 spawn-at-startup "eww" "daemon"
 
 overview {
-    zoom 0.5
-
-    workspace-shadow {
-        off
-    }
+    zoom 0.8
+    workspace-shadow { off; }
 }
 
+// Wallpaper within overview fix 
 layer-rule {
     match namespace="^wallpaper$"
     place-within-backdrop true
+}
+
+// Amnezia VPN
+window-rule {
+    match title="Xwayland on :0"
+    open-floating true
+    open-on-workspace "5"
+
+    max-height 680
+    max-width 380
 }
 
 hotkey-overlay {
     skip-at-startup
 }
 
-screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
-
 environment {
     QT_QPA_PLATFORM "wayland"
+    GTK_THEME "Colloid-Grey-Dark-Compact"
     DISPLAY null
 }
 
 cursor {
     xcursor-theme "Noir"
     xcursor-size 26 
-
     hide-when-typing
-    hide-after-inactive-ms 1000
+}
+
+clipboard {
+    disable-primary
 }
 
 animations { }
-// Example: block out two password managers from screen capture.
-// (This example rule is commented out with a "/-" in front.)
-/-window-rule {
+
+// Block out from screen capture
+window-rule {
     match app-id=r#"^org\.keepassxc\.KeePassXC$"#
     match app-id=r#"^org\.gnome\.World\.Secrets$"#
 
     block-out-from "screen-capture"
-
-    // Use this instead if you want them visible on third-party screenshot tools.
-    // block-out-from "screencast"
 }
 
+// Round corners
 window-rule {
     geometry-corner-radius 6 
     clip-to-geometry true 
 }
 
+// Satty (screenshot)
 window-rule {
     match app-id="satty"
     open-floating true
 }
 
+
+workspace "1"
+workspace "2"
+workspace "3"
+workspace "4"
+workspace "5"
+
+
 binds {
     Mod+Return { spawn "alacritty"; }
-    Alt+Space { spawn "fuzzel"; }
+    Mod+Space { spawn "fuzzel"; }
     Mod+Shift+S { spawn-sh "grim -t ppm -g \"$(slurp -d)\" - | satty -f - --initial-tool=highlight --copy-command=wl-copy --actions-on-escape=\"save-to-clipboard,exit\" --brush-smooth-history-size=5 --disable-notifications --no-window-decoration"; }
 
     // Закрыть окно
     Mod+Escape { close-window; }
 
-    Mod+Space { switch-layout "next"; }
+    Ctrl+Space { switch-layout "next"; }
 
-    // Фокус (hjkl)
     Mod+H { focus-column-left; }
     Mod+J { focus-window-down; }
     Mod+K { focus-window-up; }
     Mod+L { focus-column-right; }
 
-    // Перемещение окон
     Mod+Shift+H { move-column-left; }
     Mod+Shift+J { move-window-down; }
     Mod+Shift+K { move-window-up; }
     Mod+Shift+L { move-column-right; }
 
-    // Полноэкранный режим
     Mod+F { maximize-column; }
     Mod+Shift+F { fullscreen-window; }
 
@@ -176,27 +189,10 @@ binds {
 
     Mod+Shift+E { quit; }
 
-    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
-    XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
-    XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
-
-    // Example media keys mapping using playerctl.
-    XF86AudioPlay        allow-when-locked=true { spawn-sh "playerctl play-pause"; }
-    XF86AudioPause       allow-when-locked=true { spawn-sh "playerctl play-pause"; }
-    XF86AudioStop        allow-when-locked=true { spawn-sh "playerctl stop"; }
-    XF86AudioPrev        allow-when-locked=true { spawn-sh "playerctl previous"; }
-    XF86AudioNext        allow-when-locked=true { spawn-sh "playerctl next"; }
-
-    // Consume one window from the right to the bottom of the focused column.
     Mod+Comma  { consume-window-into-column; }
-    // Expel the bottom window from the focused column to the right.
     Mod+Period { expel-window-from-column; }
 
-    // Cycle through widths set in preset-column-widths.
     Mod+R { switch-preset-column-width; }
-
-    // Cycling through the presets in reverse order is also possible.
     Mod+Shift+R { switch-preset-column-width-back; }
 
     Mod+Ctrl+Shift+R { switch-preset-window-height; }
@@ -204,35 +200,26 @@ binds {
 
     Mod+M { maximize-window-to-edges; }
 
-    // Makes the column "fill the rest of the space".
     Mod+Ctrl+F { expand-column-to-available-width; }
 
     Mod+C { center-column; }
 
-    // Center all fully visible columns on screen.
     Mod+Ctrl+C { center-visible-columns; }
 
     Mod+Minus { set-column-width "-10%"; }
     Mod+Equal { set-column-width "+10%"; }
 
-    // Finer height adjustments when in column with other windows.
     Mod+Shift+Minus { set-window-height "-10%"; }
     Mod+Shift+Equal { set-window-height "+10%"; }
 
-    // Move the focused window between the floating and the tiling layout.
     Mod+V       { toggle-window-floating; }
     Mod+Shift+V { switch-focus-between-floating-and-tiling; }
 
-    // Toggle tabbed column display mode.
-    // Windows in this column will appear as vertical tabs,
-    // rather than stacked on top of each other.
     Mod+W { toggle-column-tabbed-display; }
 
     Print { screenshot; }
     Ctrl+Print { screenshot-screen; }
     Alt+Print { screenshot-window; }
 
-    // Powers off the monitors. To turn them back on, do any input like
-    // moving the mouse or pressing any other key.
     Mod+Shift+P { power-off-monitors; }
 }
