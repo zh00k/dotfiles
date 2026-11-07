@@ -61,7 +61,6 @@ PROMPT2="${cur_cmd}> "
 # =========================
 # Aliases
 # =========================
-alias config='/usr/bin/git --git-dir=$HOME/.dots/ --work-tree=$HOME'
 alias ll='ls -lah'
 alias la='ls -A'
 alias l='ls -CF'
